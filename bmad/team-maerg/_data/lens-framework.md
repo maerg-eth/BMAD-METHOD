@@ -173,25 +173,25 @@ Tier assignment is by blast radius for this deployment profile (solo user, assis
 
 ### Lens 14 — Termination awareness
 
-**Definition.** Can this agent correctly detect when it's done? Step repetition, infinite loops, unaware-of-stop-conditions are the failure modes.
+**Definition.** Can this agent correctly detect when to terminate — covering both directions of termination failure: the fail-to-stop direction (keep running when done) and the stop-too-soon direction (declare done when incomplete)?
 
 **When it applies.** At `*propose-agent` for any iterative or multi-step agent. At workflow design — e.g., audit-ecosystem's HALT gate at step 2 is this lens applied.
 
-**Failure mode caught.** Infinite loops, step repetition, running past completion without recognizing completion.
+**Failure mode caught.** Both directions of termination failure: (a) agent fails to stop — unnecessary continuation past completion conditions; (b) agent stops too early — declares task done before objectives are met.
 
-**Source.** MAST FC1 (Cemri et al., arXiv:2503.13657, UC Berkeley 2025). Cluster 1 failure modes: `FM-1.3` Step Repetition, `FM-1.5` Unaware of Termination Conditions.
+**Source.** MAST (Cemri et al., arXiv:2503.13657, UC Berkeley 2025). `FM-1.5` "Unaware of termination conditions" in FC1 (fail-to-stop direction). `FM-3.1` "Premature termination" in FC3 (stop-too-soon direction). The paper separates these by structural cluster; this lens pairs them by semantic axis.
 
 ---
 
 ### Lens 15 — Output verification
 
-**Definition.** Does the agent verify its output before declaring done? Distinct from eval-first (lens 1): eval-first is design-time ("what does 'good' look like?"), output verification is runtime ("does this specific output meet the bar?").
+**Definition.** Does the agent verify its output before declaring done? Distinct from eval-first (lens 1): eval-first is design-time ("what does 'good' look like?"), output verification is runtime ("does this specific output meet the bar?"). Also distinct from lens 14: termination awareness is _when_ to stop; output verification is _whether the output is correct_ before stopping.
 
 **When it applies.** At `*propose-agent` for any agent that produces consequential output. At workflow design — the audit-ecosystem checklist.md is this lens operationalized against audit records.
 
-**Failure mode caught.** Premature victory declaration, no verification, incorrect verification. MAST reports 21.3% of multi-agent failures are verification-related alone.
+**Failure mode caught.** No verification (declaring done without checking) or incorrect verification (checking with wrong criteria).
 
-**Source.** MAST FC3 (Cemri et al., arXiv:2503.13657). `FM-3.1` Premature Termination, `FM-3.2` No/Incomplete Verification, `FM-3.3` Incorrect Verification.
+**Source.** MAST (Cemri et al., arXiv:2503.13657). `FM-3.2` "No or incomplete verification" and `FM-3.3` "Incorrect verification" in FC3. Note: `FM-3.1` "Premature termination" also lives in FC3 but belongs semantically to lens 14's termination axis, not this lens.
 
 ---
 
