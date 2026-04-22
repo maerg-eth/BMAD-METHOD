@@ -1,0 +1,49 @@
+# Audit-Ecosystem Workflow Configuration
+# Ecosystem health check for Team Maerg. Drift-first reconciliation that fails
+# loud, then emits freshness, dual-signal scope overlap (Jaccard + LLM),
+# derived surface report, eval-alignment gaps, staleness, bidirectional orphan
+# scan, prioritized summary. Registry writes gated by explicit per-agent
+# confirmation. Dead-weight detection deferred (no invocation telemetry).
+name: audit-ecosystem
+description: "Ecosystem health check for Team Maerg: drift-first reconciliation, then overlap/surface/eval/staleness/orphan reports. Registry writes gated per-agent."
+author: "BMad"
+
+# Critical variables from config_source
+config_source: "{project-root}/bmad/team-maerg/config.yaml"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/bmad/team-maerg/workflows/audit-ecosystem"
+template: false
+instructions: "{installed_path}/instructions.md"
+validation: "{installed_path}/checklist.md"
+
+# Workflow-specific variables
+variables:
+  ecosystem_registry: "{config_source}:ecosystem_registry" # Source of truth per principle 6
+  audit_output_folder: "{project-root}/bmad/team-maerg/_data/audits" # Ecosystem state dir, not {output_folder}
+
+# Output — single canonical field composing audit folder + date.
+# Same-day re-runs append -HHMMSS suffix; logic in instructions.md.
+default_output_file: "{audit_output_folder}/audit-{{date}}.md"
+
+# Audit read-scope (system paths the workflow reads — not user-provided docs).
+# Kept here for scope documentation; if BMAD strictness matters, move these to
+# variables: block.
+recommended_inputs:
+  - agent_sources: "{project-root}/src/modules/team-maerg/agents/"
+  - agent_compiled_md: "{project-root}/bmad/team-maerg/agents/"
+  - agent_claude_commands: "{project-root}/.claude/commands/bmad/team-maerg/"
+  - agent_manifest_csv: "{project-root}/bmad/_cfg/agent-manifest.csv"
+  - manifest_yaml: "{project-root}/bmad/_cfg/manifest.yaml"
+  - lens_framework: "{project-root}/bmad/team-maerg/_data/lens-framework.md"
+  - workflows_folder: "{project-root}/bmad/team-maerg/workflows/"
+
+# Tools — standard BMAD + Bash for git log recency.
+required_tools:
+  - "Bash":
+      description: "Used for `git log --follow --format=%aI -1 -- <path>` per-agent recency signal in step 3."
+      link: "https://git-scm.com/docs/git-log"

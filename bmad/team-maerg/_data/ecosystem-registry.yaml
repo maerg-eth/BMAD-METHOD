@@ -1,0 +1,49 @@
+# Team Maerg Ecosystem Registry
+# Source of truth per principle 6.
+# Schema: inline in agent.yaml where spec, here where state-that-nothing-else-owns.
+#
+# Writers (who writes which fields when):
+#   *propose-agent (on approval) → appends new row with id, name, status=active, purpose,
+#                                   scope_boundaries, success_rubric, capability_tier,
+#                                   created, last_reviewed=created,
+#                                   principles_conflict_check (required, see below)
+#   *evolve-agent                → updates name (if renamed), purpose, scope_boundaries,
+#                                   success_rubric, capability_tier, last_reviewed;
+#                                   if persona.principles modified → re-writes
+#                                   principles_conflict_check
+#   *retire-agent                → sets status=retired, retired_on, retirement_reason
+#   *audit-ecosystem             → may update last_reviewed after deep inspection;
+#                                   reports drift (registry.name ≠ agent.yaml.metadata.name,
+#                                   stale last_reviewed, agents missing from registry or vice versa);
+#                                   Phase 2 addition: flags missing/stale
+#                                   principles_conflict_check as Gap 4
+#   *registry                    → READ ONLY
+#
+# principles_conflict_check field (Phase 1 of mechanizing team-principles.md principle 5):
+#   Structural auditability for agent persona-principles vs team-principles coherence.
+#   Populated at agent creation and at every persona-principle modification.
+#   Format: {date: YYYY-MM-DD, verified_by: "<agent or session identifier>"}.
+#   Phase 2 trigger (N=2 active agents OR first persona modification): audit-ecosystem
+#   enforces as Gap 4. Phase 3 trigger (N=5+ OR first actual conflict incident):
+#   replaced by a check-principles-coherence sub-workflow with LLM-pairwise judgment.
+#
+# Drift defense: *audit-ecosystem always runs registry-vs-filesystem reconciliation FIRST.
+# Fail loud, not silent.
+
+agents:
+  - id: team-maerg/chuck
+    name: Chuck
+    status: active
+    purpose: "Principal Agent Architect — designs, builds, evolves, retires Team Maerg agents."
+    scope_boundaries: "Meta-layer only. Does not execute Brix work or personal tasks himself."
+    success_rubric: "Succeeding when: (a) every proposed agent either ships or gets rejected with a documented lens-based reason; (b) registry-filesystem drift stays at zero across audits; (c) no permission expansion is recommended without an explicit blast-radius note."
+    capability_tier: strategic
+    created: 2026-04-22
+    last_reviewed: 2026-04-22
+    principles_conflict_check:
+      date: 2026-04-22
+      verified_by: "Chuck (session verification 2026-04-22, adversarial subagent audit of persona principles 1-9 vs team principles 1-5. Finding: P8 × T5 same-axis overlap detected — P8's once-and-execute could swallow T5's halt-on-principle-conflict. Resolved by exception clause added to P8. All other pairs orthogonal, agreeing, or legitimately stricter-on-same-axis per precedence rule.)"
+    retired_on: null
+    retirement_reason: null
+
+retired: []

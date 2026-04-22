@@ -1,0 +1,31 @@
+# Team Maerg Module Configuration
+# Ecosystem meta-layer for Brix + personal agents. Owned by Chuck.
+# Created 2026-04-22.
+
+# Standard BMAD config
+user_name: BMad
+communication_language: English
+document_output_language: English
+output_folder: "{project-root}/docs"
+
+# Capability tier → Model mapping (Lens 17: tier is design, model is config).
+# Update this one mapping when a new flagship ships — single edit, ecosystem-wide effect.
+# Per-agent override via `model_override` in agent.yaml metadata (AutoGen filter_dict pattern).
+tier_to_model:
+  strategic: claude-opus-4-7
+  ops: claude-sonnet-4-6
+  low-volume: claude-haiku-4-5
+
+# Ecosystem source of truth per principle 6.
+ecosystem_registry: "{project-root}/bmad/team-maerg/_data/ecosystem-registry.yaml"
+
+# Team-wide agent principles — loaded at activation by every Team Maerg agent.
+# Principles_version in the file header; see precedence rule within.
+team_principles: "{project-root}/bmad/team-maerg/_data/team-principles.md"
+
+# Autonomous deployment default — decided 2026-04-22 via research.
+# GitHub Actions + anthropics/claude-code-action@v1 wins on budget (no Anthropic tier caps),
+# off-ramp (portable), observability (GH Actions logs/reruns), and post-OpenClaw secrets posture.
+# Claude Code Routines (Research Preview) is narrow-case only: non-GitHub webhooks,
+# runs-when-laptop-closed. Self-hosted Claude runners are the OpenClaw failure shape — avoid.
+autonomous_layer_default: github-actions
