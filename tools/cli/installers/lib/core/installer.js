@@ -1135,7 +1135,12 @@ class Installer {
       moduleName === 'core' ? path.join(getModulePath('core'), 'agents') : path.join(getSourcePath(`modules/${moduleName}`), 'agents');
 
     if (!(await fs.pathExists(sourceAgentsPath))) {
-      return; // No source agents to rebuild
+      console.warn(
+        chalk.yellow(
+          `Warning: skipping agent rebuild for module '${moduleName}' — source agents path not found: ${sourceAgentsPath} (module may have a non-standard top-level layout — see custom-module installer plan)`,
+        ),
+      );
+      return;
     }
 
     // Determine project directory (parent of bmad/ directory)
