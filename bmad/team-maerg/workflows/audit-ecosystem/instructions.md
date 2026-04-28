@@ -75,19 +75,52 @@ This record is written to {{audit_filepath}} at step 2 on abort, or at step 10 o
 
 <critical>This step is the hard gate. If any drift is detected, the audit aborts here and no subsequent step runs. The aborted audit record is still written in full (not a stub) with run_status=aborted, reconciliation=drift, and complete drift findings.</critical>
 
-<action>For each active agent in {{active_agents}}, verify four-way coherence across sources. Step 2 references the raw parses {{registry_parse}} and {{agent_yaml_parse[id]}} — NOT {{agent_bundle[id]}}, because this step certifies the properties the bundle assumes. Record each check as a pass/fail row in {{drift_findings}}:
+<action>BMAD uses two id conventions for the same agent. The registry uses short form `<module>/<short-name>` (e.g., `team-maerg/chuck`). The YAML `metadata.id` uses compiled-path form (e.g., `bmad/team-maerg/agents/chuck.md`). Filenames use short-name only (e.g., `chuck.agent.yaml`, `chuck.md`). The id-resolution algorithms below are binding for step 2 — naive `{id}` substitution into a path is incorrect.
 
-Coherence checks per agent:
+Forward resolution (registry row → resolved paths). Apply once per active agent before running coherence checks:
 
-1. Registry → source YAML: Does `{project-root}/src/modules/team-maerg/agents/{id}.agent.yaml` exist?
-2. Registry → compiled MD: Does `{project-root}/bmad/team-maerg/agents/{id}.md` exist?
-3. Registry → Claude command: Does `{project-root}/.claude/commands/bmad/team-maerg/agents/{id}.md` exist?
-4. Registry → manifest CSV: Is there a row for this agent in {{manifest_csv_rows}}?
-5. Registry → manifest YAML: Is this agent listed in {{manifest_yaml_entries}}?
-6. Name match: `registry_parse.agents[id].name` == `agent_yaml_parse[id].metadata.name`?
-7. Status match: registry says active AND source file exists (not moved to a retired location)?</action>
+```
+For each registry_row in {{active_agents}}:
+  registry_id      = registry_row.id                                            # "team-maerg/chuck"
+  if "/" not in registry_id: flag as "registry.id format violation" (drift); continue
+  module, short    = registry_id.split("/", 1)                                  # ("team-maerg", "chuck")
+  source_path      = "{project-root}/src/modules/" + module + "/agents/" + short + ".agent.yaml"
+  compiled_path    = "{project-root}/bmad/" + module + "/agents/" + short + ".md"
+  claude_cmd_path  = "{project-root}/.claude/commands/bmad/" + module + "/agents/" + short + ".md"
+  resolved_paths[registry_id] = {module, short, source_path, compiled_path, claude_cmd_path}
+```
 
-<action>For each file under `{project-root}/src/modules/team-maerg/agents/*.agent.yaml`, verify reverse direction (keyed by `agent_yaml_parse[id].metadata.id`): 8. Source → registry: Is there a registry row (active or retired) for this agent id in {{registry_parse}}? A source file with no registry presence is drift.</action>
+Reverse resolution (YAML `metadata.id` → registry id). Apply once per source YAML file:
+
+```
+For each yaml_file in {project-root}/src/modules/team-maerg/agents/*.agent.yaml:
+  metadata_id  = agent_yaml_parse[yaml_file].metadata.id                        # "bmad/team-maerg/agents/chuck.md"
+  parts        = metadata_id.split("/")                                          # ["bmad", "team-maerg", "agents", "chuck.md"]
+  if len(parts) != 4 or parts[0] != "bmad" or parts[2] != "agents" or not parts[3].endswith(".md"):
+    flag yaml_file as "yaml metadata.id format violation" (drift); skip remaining steps for this file
+  module = parts[1]
+  short  = parts[3][:-3]                                                         # strip trailing ".md"
+  derived_registry_id = module + "/" + short                                    # "team-maerg/chuck"
+  yaml_to_registry_id[yaml_file] = derived_registry_id
+```
+
+Format violations from either algorithm are recorded as drift findings (one per violation, with check type "id format violation" and the offending value).</action>
+
+<action>For each active agent in {{active_agents}}, verify coherence across sources using the resolved forms above. Step 2 references the raw parses {{registry_parse}} and {{agent_yaml_parse[id]}} — NOT {{agent_bundle[id]}}, because this step certifies the properties the bundle assumes. Record each check as a pass/fail row in {{drift_findings}}:
+
+Coherence checks per agent (let `r = resolved_paths[registry_id]`):
+
+1. Registry → source YAML: Does `r.source_path` exist on disk?
+2. Registry → compiled MD: Does `r.compiled_path` exist on disk?
+3. Registry → Claude command: Does `r.claude_cmd_path` exist on disk?
+4. Registry → manifest CSV: Is there a row in {{manifest_csv_rows}} where `name == r.short` AND `module == r.module`?
+5. Registry → manifest YAML: Is `r.module` listed in {{manifest_yaml_entries}}'s modules list?
+6. Name match: `registry_parse.agents[registry_id].name == agent_yaml_parse[r.source_path].metadata.name`?
+7. Status match: registry says active AND `r.source_path` exists (not moved to a retired location)?</action>
+
+<action>For each file under `{project-root}/src/modules/team-maerg/agents/*.agent.yaml`, verify reverse direction using `yaml_to_registry_id`:
+
+8. Source → registry: Is `yaml_to_registry_id[yaml_file]` present (as active or retired) in {{registry_parse}}? A source file with no registry presence is drift.</action>
 
 <action>Count drift findings into {{drift_count}}. Any failed check = one drift finding (record agent id, check type, expected vs observed).</action>
 
