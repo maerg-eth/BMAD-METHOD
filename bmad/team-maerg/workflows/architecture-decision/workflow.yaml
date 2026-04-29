@@ -1,0 +1,51 @@
+# Architecture-Decision Workflow Configuration
+# Lightweight ADR pattern for Chuck's non-trivial structural calls.
+# Per build research (2026-04-29): industry favors lightweight ADR documents
+# over heavyweight workflow gating; this workflow enforces capture consistency
+# (template + dissent slot + lens citations) without auto-firing research subagents.
+# Subagent spawning is JUDGMENT-driven (step 3), not mandated.
+name: architecture-decision
+description: "Lightweight ADR workflow for non-trivial structural calls. Loads template, applies lens framework analysis, optionally spawns research subagents when the option space warrants breadth-first research, outputs structured ADR to bmad/team-maerg/_data/decisions/."
+author: "Chuck (team-maerg)"
+
+# Critical variables from config_source
+config_source: "{project-root}/bmad/team-maerg/config.yaml"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/bmad/team-maerg/workflows/architecture-decision"
+template: false
+instructions: "{installed_path}/instructions.md"
+validation: "{installed_path}/checklist.md"
+
+# Workflow-specific variables
+variables:
+  ecosystem_registry: "{config_source}:ecosystem_registry"
+  team_principles: "{config_source}:team_principles"
+  lens_framework: "{project-root}/bmad/team-maerg/_data/lens-framework.md"
+  adr_template: "{project-root}/bmad/team-maerg/_data/architecture-decision-template.md"
+  decisions_folder: "{project-root}/bmad/team-maerg/_data/decisions"
+
+# Output — ADR file in decisions/. Slug derived from question or user-supplied;
+# same-day re-runs append -HHMMSS suffix per audit-ecosystem precedent.
+default_output_file: "{decisions_folder}/{{date}}-{{slug}}.md"
+
+# Recommended inputs — system paths read by workflow.
+recommended_inputs:
+  - lens_framework: "{project-root}/bmad/team-maerg/_data/lens-framework.md"
+  - team_principles: "{project-root}/bmad/team-maerg/_data/team-principles.md"
+  - adr_template: "{project-root}/bmad/team-maerg/_data/architecture-decision-template.md"
+  - prior_decisions: "{project-root}/bmad/team-maerg/_data/decisions/"
+  - ecosystem_registry: "{project-root}/bmad/team-maerg/_data/ecosystem-registry.yaml"
+
+# Tools
+required_tools:
+  - "Read":
+      description: "Load ADR template, lens framework, team principles, prior ADRs."
+  - "Write":
+      description: "Write the new ADR file to decisions/."
+  - "Agent":
+      description: "Optional. Spawn research subagents only in breadth-bound option-space cases (step 3 judgment). Anti-pattern: spawning by default is documented to use ~15× more tokens than single-agent CoT (Anthropic 2025) without quality gains for ≤3-hop reasoning tasks."

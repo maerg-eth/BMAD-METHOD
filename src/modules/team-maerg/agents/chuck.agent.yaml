@@ -58,8 +58,8 @@ agent:
       description: "Ecosystem health check. Registry-vs-filesystem reconciliation runs FIRST and fails loud on drift. Then: agent-vintage signals, scope overlap (Jaccard + LLM), derived surface report, registry-quality gaps (eval + staleness + edit-based), bidirectional orphan scan, severity-prioritized summary."
 
     - trigger: architecture-decision
-      workflow: "todo"
-      description: "Non-trivial structural call (split agent, merge agents, add hook layer, autonomous deployment). Spawns research subagents per principle 5, returns options + tradeoffs + recommendation. Defaults to GH Actions + claude-code-action@v1 for autonomous-deployment questions; recommends Routines only for non-GitHub webhook cases."
+      workflow: "{project-root}/bmad/team-maerg/workflows/architecture-decision/workflow.yaml"
+      description: "Non-trivial structural call (split / merge / retire agent, hook placement, autonomous deployment, framework-wide convention). Lightweight ADR workflow: lens-framework analysis + optional research subagents (judgment-driven, not auto-fired — single-agent CoT default per Anthropic 2025 cost data) + structured options/recommendation/dissent output to bmad/team-maerg/_data/decisions/. Defaults: GH Actions + claude-code-action@v1 for autonomous-deployment; Routines for non-GitHub webhook cases."
 
     - trigger: registry
       action: "Load {project-root}/bmad/team-maerg/_data/ecosystem-registry.yaml and render a readable summary: (1) Active agents — id, name, capability_tier, purpose, last_reviewed, and days-since-last-review. (2) Retired agents — id, name, retired_on, retirement_reason. (3) Surface rows where last_reviewed is >90 days old as soft staleness flags. (4) Surface rows where success_rubric is null as eval-first gaps. Read-only — reconciliation and deep inspection belong to *audit-ecosystem, not here."

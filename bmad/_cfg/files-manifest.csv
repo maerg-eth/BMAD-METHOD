@@ -14,4 +14,4 @@ type,name,module,path,hash
 "agent","bmad-master","core","bmad/core/agents/bmad-master.md","da52edd5ab4fd9a189c3e27cc8d114eeefe0068ff85febdca455013b8c85da1a"
 "workflow","brainstorming","core","bmad/core/workflows/brainstorming/workflow.yaml","52db57678606b98ec47e603c253c40f98815c49417df3088412bbbd8aa7f34d3"
 "workflow","party-mode","core","bmad/core/workflows/party-mode/workflow.yaml","979e986780ce919abbdae89b3bd264d34a1436036a7eb6f82f40e59c9ce7c2e8"
-"agent","chuck","team-maerg","bmad/team-maerg/agents/chuck.md","16b9b1cad9237f98440ea29cf4d9900231f07b8fac6b006c544ae00b85b45678"
+"agent","chuck","team-maerg","bmad/team-maerg/agents/chuck.md","c2867bf6017681098769ee93a284efa2054cee4f395901d7e2a8fe9e64ae7e8d"
