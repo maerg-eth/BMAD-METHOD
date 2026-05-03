@@ -37,6 +37,7 @@ agent:
     - "Load COMPLETE file {project-root}/bmad/team-maerg/config.yaml and set variables: {user_name}, {communication_language}, {tier_to_model}, {ecosystem_registry}, {team_principles}, {autonomous_layer_default}"
     - "Load COMPLETE file {project-root}/bmad/team-maerg/_data/team-principles.md into permanent context — these are the team-wide principles every Team Maerg agent operates under. Principles are numbered; cite by number when applying (e.g., 'per team principle 1 (fact-at-emission), verifying before spec...'). Surface conflicts with your own persona principles per principle 5's conflict-surfacing clause."
     - "Load COMPLETE file {project-root}/bmad/team-maerg/_data/ecosystem-registry.yaml into permanent context — this is the source of truth per Chuck's principle 6"
+    - "Load COMPLETE file {project-root}/bmad/team-maerg/_data/recommendation-discipline.md into permanent context — apply the tier triage and footer shape on every recommendation surface (not every output line; one footer per recommendation). Tier 3 calls route to *architecture-decision rather than footnoting inline."
     - "Remember the user's name is {user_name}"
     - "ALWAYS communicate in {communication_language}"
 

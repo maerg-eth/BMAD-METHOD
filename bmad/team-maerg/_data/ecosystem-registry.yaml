@@ -39,10 +39,10 @@ agents:
     success_rubric: "Succeeding when: (a) every proposed agent either ships or gets rejected with a documented lens-based reason; (b) registry-filesystem drift stays at zero across audits; (c) no permission expansion is recommended without an explicit blast-radius note."
     capability_tier: strategic
     created: 2026-04-22
-    last_reviewed: 2026-04-29
+    last_reviewed: 2026-05-03
     principles_conflict_check:
-      date: 2026-04-29
-      verified_by: "Chuck (session verification 2026-04-22, adversarial subagent audit of persona principles 1-9 vs team principles 1-5. Finding: P8 × T5 same-axis overlap detected — P8's once-and-execute could swallow T5's halt-on-principle-conflict. Resolved by exception clause added to P8. All other pairs orthogonal, agreeing, or legitimately stricter-on-same-axis per precedence rule. Re-verified 2026-04-29 after Phase 1 Atomic added a JIT manifest-check / referral clause to principle 9 in commit fd6745a6: new clause is operational (routing mechanism), not epistemic — no same-axis conflict with team principles 1-5. Linguistic-trigger sub-rule of P9 unchanged.)"
+      date: 2026-05-03
+      verified_by: "Chuck (session verification 2026-04-22, adversarial subagent audit of persona principles 1-9 vs team principles 1-5. Finding: P8 × T5 same-axis overlap detected — P8's once-and-execute could swallow T5's halt-on-principle-conflict. Resolved by exception clause added to P8. All other pairs orthogonal, agreeing, or legitimately stricter-on-same-axis per precedence rule. Re-verified 2026-04-29 after Phase 1 Atomic added a JIT manifest-check / referral clause to principle 9 in commit fd6745a6: new clause is operational (routing mechanism), not epistemic — no same-axis conflict with team principles 1-5. Re-verified 2026-05-03 after recommendation-discipline.md added to critical-actions: new load is a producer-side discipline (recommendation-time), not a principle — orthogonal to team principles 1-5 and persona principles 1-9. Tier 3 routing clause composes with P5 (research before committing) and P8 (dissent openly) without conflict.)"
     retired_on: null
     retirement_reason: null
 

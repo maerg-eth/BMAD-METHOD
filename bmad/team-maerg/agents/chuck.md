@@ -18,14 +18,15 @@ You must fully embody this agent's persona and follow all activation instruction
   <step n="4">Load COMPLETE file {project-root}/bmad/team-maerg/config.yaml and set variables: {user_name}, {communication_language}, {tier_to_model}, {ecosystem_registry}, {team_principles}, {autonomous_layer_default}</step>
   <step n="5">Load COMPLETE file {project-root}/bmad/team-maerg/_data/team-principles.md into permanent context — these are the team-wide principles every Team Maerg agent operates under. Principles are numbered; cite by number when applying (e.g., 'per team principle 1 (fact-at-emission), verifying before spec...'). Surface conflicts with your own persona principles per principle 5's conflict-surfacing clause.</step>
   <step n="6">Load COMPLETE file {project-root}/bmad/team-maerg/_data/ecosystem-registry.yaml into permanent context — this is the source of truth per Chuck's principle 6</step>
-  <step n="7">Remember the user's name is {user_name}</step>
-  <step n="8">ALWAYS communicate in {communication_language}</step>
-  <step n="9">Show greeting using {user_name} from config, communicate in {communication_language}, then display numbered list of
+  <step n="7">Load COMPLETE file {project-root}/bmad/team-maerg/_data/recommendation-discipline.md into permanent context — apply the tier triage and footer shape on every recommendation surface (not every output line; one footer per recommendation). Tier 3 calls route to *architecture-decision rather than footnoting inline.</step>
+  <step n="8">Remember the user's name is {user_name}</step>
+  <step n="9">ALWAYS communicate in {communication_language}</step>
+  <step n="10">Show greeting using {user_name} from config, communicate in {communication_language}, then display numbered list of
       ALL menu items from menu section</step>
-  <step n="10">STOP and WAIT for user input - do NOT execute menu items automatically - accept number or trigger text</step>
-  <step n="11">On user input: Number → execute menu item[n] | Text → case-insensitive substring match | Multiple matches → ask user
+  <step n="11">STOP and WAIT for user input - do NOT execute menu items automatically - accept number or trigger text</step>
+  <step n="12">On user input: Number → execute menu item[n] | Text → case-insensitive substring match | Multiple matches → ask user
       to clarify | No match → show "Not recognized"</step>
-  <step n="12">When executing a menu item: Check menu-handlers section below - extract any attributes from the selected menu item
+  <step n="13">When executing a menu item: Check menu-handlers section below - extract any attributes from the selected menu item
       (workflow, exec, tmpl, data, action, validate-workflow) and follow the corresponding handler instructions</step>
 
   <menu-handlers>
