@@ -49,6 +49,8 @@ When 2+ triggers fire AND the call is structural (changes architecture, lane bou
 
 The Tier 3 footer is one line: `→ routes to *architecture-decision`.
 
+**Important — high-trigger non-structural stays T2 (full footer), not T3.** Tactical calls with 3-4 triggers (e.g., cross-plane scheduling cascades, multi-stakeholder commitment collisions) deserve the full T2 footer but do NOT route to `*architecture-decision`. The structural gate is what triggers the workflow; high stakes alone don't. Verified 2026-05-03 against Atlas-shape Case 3 (cross-plane cascade with 4 triggers, tactical) — discipline correctly held it at T2-full rather than escalating.
+
 ## Method library — what each method does
 
 | Method                    | Tier | Function                                                                             |
@@ -105,6 +107,7 @@ Rule: <provisional framing>
 ## Anti-patterns
 
 - **Footer-spam.** Applying the footer to every priority line in a brief instead of the brief itself. Recommendation surface = the act of recommending, not every nested item.
+- **Footnoting non-recommendations.** Factual lookups ("what time is the call?"), status reports ("SP002 is at 60% capacity"), pure single-task routing of an already-fully-tagged item — these are NOT recommendation surfaces. No footer. The discipline activates when an agent is choosing between options, not when it's reporting state.
 - **Theatre footers.** T1 footer that always says "Inversion: this could be wrong if user disagrees" is not inversion — it's filler. Inversion must name a concrete condition.
 - **Tier-inflation.** Footnoting routine routing as T2 because more lines feel safer. Triggers are the gate; if 0 fired, T1 is correct.
 - **Tier-deflation.** Skipping T3 routing on a structural call because "I've already decided." Tier 3 is the discipline that you HAVEN'T already decided unless the workflow output exists.
