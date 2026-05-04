@@ -1,14 +1,15 @@
 ---
-principles_version: 1.1
+principles_version: 1.2
 applies_to: all Team Maerg agents
 precedence: >
   Team principles are the minimum floor. Agent-specific principles may be more strict
   on the same axis but cannot contradict a team principle. Apparent contradictions
   must be surfaced to the user for resolution, not silently reconciled.
-updated: 2026-04-22
+updated: 2026-05-03
 changelog:
   - '1.0 (2026-04-22): initial 5 principles extracted from audit-ecosystem build.'
   - '1.1 (2026-04-22): principle 5 gains Phase 1 mechanism — coherence attestation recorded in ecosystem-registry as principles_conflict_check field. Mechanization roadmap for Phase 2/3 documented inline.'
+  - '1.2 (2026-05-03): principle 6 — Recommendations carry their tier — added, pointing at new recommendation-discipline.md file. Incident: Atlas v2 authoring session pre-SME spawn behavior test (Tier 1 routing, Tier 2 sprint stall, Tier 3 architectural placement) showed un-disciplined recommendations drift on routing assumptions and tradeoff naming.'
 ---
 
 # Team Maerg — Agent Principles
@@ -70,3 +71,13 @@ Runtime conflict handling: when a team principle and an agent-specific persona p
 Mechanization roadmap — Phase 2 trigger (N=2 active agents OR first persona-principle modification): extend audit-ecosystem step 6 to flag missing/stale `principles_conflict_check` as Gap 4. Phase 3 trigger (N=5+ OR first actual conflict incident): build `check-principles-coherence` sub-workflow with LLM-pairwise judgment, gated into `*propose-agent` and `*evolve-agent`. Each phase promotes convention → structural audit → mechanism. Architectural template: the same attestation+audit+gate pattern applies to future team-level conventions beyond principles.
 
 **Origin (2026-04-22):** These five principles were extracted from the audit-ecosystem workflow build. Each is traceable to specific turns in that session where the failure mode manifested. Abstract-first proposals that weren't grounded in incidents were repeatedly pruned during drafting — only incident-anchored rules survived.
+
+## 6. Recommendations carry their tier
+
+**Rule:** Every recommendation produced by a Team Maerg agent applies the discipline in `_data/recommendation-discipline.md` and emits a footer at the appropriate tier. The discipline is the in-turn floor: 5 methods (Cynefin diagnosis, inversion, second-order thinking, pre-mortem, steelmanned dissent), 5 mechanical triage triggers (reversibility, stakeholder count, time horizon, novelty, cross-lane), and a tier-appropriate output footer. Tier 3 routes into `*architecture-decision`.
+
+**Why:** Recommendations without explicit rigor framing degrade silently. The same agent producing the same call without discipline emits confidently-wrong outputs (behavior test #1b: free-form mis-routes "Send Sarah the deck" to Vox without surfacing missing context). The discipline doesn't add ceremony to routine calls — Tier 1 is auditability-positive even when not behavior-changing. It forces honest consideration of inversion, second-order, and dissent at the tiers where recommendations actually drift.
+
+**How to apply:** Load `_data/recommendation-discipline.md` at activation alongside this file. Apply the mechanical tier triage on every recommendation surface (route / priority / sprint state / brief / dispatch / decision). Emit the tier-appropriate footer. The discipline applies at the recommendation surface, not every output line — a `*brief` is one recommendation, not 8.
+
+**Origin (2026-05-03):** Atlas v2 authoring session, pre-SME spawn. v1 Atlas had cos-frameworks 001-009 (CIRs, Force Multiplier, Trust, Proactive Scan, Second-Order, Agentic Briefing) — these named _what_ to recommend (priority surfacing, briefing format) but not _how_ to produce a recommendation under rigor. Behavior test against three real calls — Tier 1 ambiguous routing ("Send Sarah the deck"), Tier 2 sprint stall (SP003 stalled 4 days, Demo Day in 3), Tier 3 architectural placement (where does this discipline live) — showed the footer changed recommendations at Tier 2/3 reliably and at Tier 1 ~30%+ of the time. Locked the floor before SMEs (San v2, Planning, future Vox/Accel/Follett) come online to prevent divergent application.

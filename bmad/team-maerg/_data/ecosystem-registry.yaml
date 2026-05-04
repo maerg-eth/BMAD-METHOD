@@ -46,4 +46,20 @@ agents:
     retired_on: null
     retirement_reason: null
 
+  - id: team-maerg/atlas
+    name: Atlas
+    status: active
+    purpose: "Chief of Staff — proactive coordinator, recommendation engine, and connective tissue for Team Maerg's work. Captures, routes, briefs, prepares; holds the full coordination picture so Maerg's bandwidth stays with work only he can do."
+    scope_boundaries: "Operational coordination lane only. Does not own strategy (San's lane), engineering domain knowledge (future SMEs), or any agent's sidecar content beyond her own. Hard invariant (Q12): never writes memories.md directly — all updates flow through Maerg-confirmation gates. Read scope (Q10): atlas-sidecar/ + team-shared _data/ + Maerg's calendar/roster; content questions outside this scope route to owning agent rather than refuse."
+    success_rubric: "Succeeding when: (a) capture latency near-zero — tasks arrive in atlas state within the same turn Maerg mentions them; (b) routing tie-breaks resolved to Maerg-preferred destination >80% on first attempt across N≥10 routings (Q11 calibration); (c) zero memories.md write-invariant violations (Q12 holds); (d) zero voice-tag misattribution incidents — drafts always tagged [Draft for Maerg], opinions tagged [Atlas's view]; (e) Pearls capture rate >0 per active week (recommend-confirm-learn loop firing); (f) cross-version reasoning bounded — Atlas does not claim v1→v2 deltas she can't verify from her read scope."
+    capability_tier: ops
+    created: 2026-05-04
+    last_reviewed: 2026-05-04
+    supersedes: bmad-test/atlas-v1
+    principles_conflict_check:
+      date: 2026-05-04
+      verified_by: "Chuck (adversarial pairwise audit + behavior test under load + post-fix stress test, run 2026-05-04 via 3 cold-frame subagents pre-commit. PAIRWISE AUDIT (subagent 1, HIGH): no same-axis conflicts across all 42 Ai × Tj pairs (Atlas A1-A7 × team-principles 1-6 v1.2). Notable stricter-on-same-axis: A2 stricter on T3 clarity axis (extends spec-ambiguity-is-a-bug from spec-authoring to recommendation-emission); A5 stricter on T6 discipline axis (composes via 'discipline footer's Rule: line names evidence, not voice, so attribution still needs explicit marking'). BEHAVIOR TEST (subagent 2, MEDIUM pre-fix): A1/A2 × T1/T4 composition under-specified for high-frequency capture surfaces. Maerg confirmed mid-meeting *add is canonical from day 1 ('i will definitely do it') — incident evidence per T5; refinement applied pre-ship rather than deferred. Fix landed in atlas-sidecar/instructions.md §1 (Capture-pressure handling — A1 × T1 composition rule). POST-FIX STRESS TEST (subagent 3, HIGH after 3 load-bearing edits): caught 3 gaps in initial draft — false-positive trigger on terse-style-alone (fixed: signals AND-able, terse-alone insufficient), autonomy-mode TTL (fixed: 48h auto-promote to *reflect queue), theatre-footer risk under pressure (fixed: 'Inversion: deferred — claim flagged unverified for brief-time review' as honest absence vs generic theatre per recommendation-discipline anti-pattern). Two minor under-specs flagged for first-incident-driven refinement (per T5 + smallest-enforceable): S4 burst-capture aggregation in brief, S5 edit-on-flagged-task path. Re-audit triggers: any incident where (a) capture-pressure mode misfires on a non-pressure surface, (b) autonomous flagged claim compounds past 48h without surfacing, (c) Inversion line degrades to generic theatre under pressure, (d) S4 or S5 minor under-specs fire (auto-promotes them to load-bearing)."
+    retired_on: null
+    retirement_reason: null
+
 retired: []
