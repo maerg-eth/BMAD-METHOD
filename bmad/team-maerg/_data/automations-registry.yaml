@@ -28,7 +28,7 @@ automations:
   - id: upstream-scan-bi-weekly
     owning_agent: team-maerg/chuck
     cadence: "bi-weekly Monday 06:00 UTC"
-    mechanism: "TBD — /schedule routine to be created by schedule skill"
+    mechanism: "/schedule routine trig_017kd3VrhFhLahp6egKMzZzE"
     purpose: "Scan BMAD-METHOD upstream main for commits we don't have in team-maerg-relevant areas (bmad/core/, bmad/bmb/, tools/, package.json); produce bucketed brief with cherry-pick recommendations."
     output_location: "bmad/team-maerg/_data/upstream-scans/<YYYY-MM-DD>.md"
     last_fired: null
