@@ -92,6 +92,23 @@ During the session, ten distinct architectural decisions surfaced — some in re
 - `bmad/team-maerg/_data/team-principles.md` v1.2 — principle 6 added ("Recommendations carry their tier") with incident anchor to this build.
 - 3 future-trajectory project memories captured: `project_planning_agent_roadmap.md`, `project_sprint_planning_agent_roadmap.md`, `project_team_session_sync_convention.md`.
 
+### Initial calibration observations (build session, bmb-observed)
+
+These six observations of Atlas's behavior were captured by bmb during the `*create-agent` flow on 2026-05-03 → 2026-05-04. They are recorded here in the ADR rather than in Atlas's `memories-autonomous-log.md` because they are **third-party observations of agent behavior during construction**, not Atlas's own first-person runtime data — Atlas (correctly, per principle 7) declined to attest to them since she has no internal trace of `*reflect` or `*add` firing during the build session.
+
+This routing distinction sets a precedent for future SME builds: build-session observations of agent behavior live in the build ADR; only the agent's own attestable runtime data lives in their autonomous-log.
+
+| #   | Observation                                                                                                                  | Status |
+| --- | ---------------------------------------------------------------------------------------------------------------------------- | ------ |
+| O1  | Voice-tag fired correctly on `*reflect` and `*add` (load-bearing attribution, per Q5 voice-tagging discipline)               | ✓      |
+| O2  | No voice-tag on `*status` and `*roster` — state reports correctly excluded from tagging                                      | ✓      |
+| O3  | T2 footer applied on `*reflect`; T1 footer on `*add` — tier triage matches recommendation-discipline spec                    | ✓      |
+| O4  | Proactive scan flag emerged without footer — emerging pattern, formalize in `instructions.md §0` only if recurs ≥3×          | ⚠     |
+| O5  | Refused theatre on `*reflect` (declined thin output, named alternative surface — composes with principle 1 fact-at-emission) | ✓      |
+| O6  | Surfaced uncomfortable truth unprompted (registry-not-yet-appended observation — composes with principle A7)                 | ✓      |
+
+Atlas's own first-person calibration (empty-state baseline + standing gaps + `*reflect` cadence deferral + cross-version reference frame note + domain-bounded self-model meta-observation) is logged separately in `bmad/team-maerg/agents/atlas-sidecar/memories-autonomous-log.md` under `## first-run-calibration` (entry 2026-05-04).
+
 ## Dissent
 
 **Strongest honest counter:** session-record ADRs may obscure which lock had what reasoning, especially for future readers landing on Q-numbers in isolation (e.g., a new SME author hitting "what was Q4's tag-routing logic?"). The Source/Incident + Revisit trigger columns are the mitigation — every lock carries its own per-row context — but a reader skimming the table top-to-bottom may not pause on each row. If this turns out to bite (San v2 author can't reconstruct a lock's reasoning from this file alone), the fix is per-lock ADR backfills referenced from this session record, not a re-do of this format.
