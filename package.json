@@ -45,15 +45,15 @@
   },
   "lint-staged": {
     "*.{js,cjs,mjs}": [
-      "npm run lint:fix",
-      "npm run format:fix"
+      "eslint --fix",
+      "prettier --write"
     ],
     "*.yaml": [
       "eslint --fix",
-      "npm run format:fix"
+      "prettier --write"
     ],
     "*.{json,md}": [
-      "npm run format:fix"
+      "prettier --write"
     ]
   },
   "dependencies": {
