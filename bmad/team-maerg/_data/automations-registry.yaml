@@ -1,0 +1,40 @@
+# Team Maerg Automations Registry
+# Source of truth for scheduled / cadence-driven automations across the ecosystem.
+# Per ADR 2026-05-05-distributed-automation-ownership.
+#
+# Schema:
+#   id              — unique identifier (kebab-case, descriptive)
+#   owning_agent    — team-maerg/<agent-name> (the agent whose domain this serves)
+#   cadence         — human-readable cadence (e.g., "bi-weekly Monday 06:00 UTC", "monthly 1st 06:00 UTC")
+#   mechanism       — how it fires: /schedule routine ID, agent menu trigger, etc.
+#   purpose         — one-line description of what the automation does
+#   output_location — where the automation writes its output (file path, brief section, etc.)
+#   last_fired      — null until first fire, then YYYY-MM-DD
+#   next_fire       — next expected fire date (YYYY-MM-DD)
+#   created         — YYYY-MM-DD
+#   retired_on      — null until retired
+#   retirement_reason — null until retired
+#
+# Writers (who updates which fields when):
+#   Owning agent      → creates row at automation creation; updates last_fired + next_fire after each fire
+#   *audit-ecosystem  → flags stale (last_fired > 2× cadence), failed (mechanism unreachable), or drifted entries
+#   *automations      → READ ONLY (Chuck's read-only summary command)
+#
+# Drift defense: *audit-ecosystem reconciles registry-vs-mechanism state.
+# A registered automation whose /schedule routine doesn't exist → flag.
+# An existing /schedule routine not in registry → flag.
+
+automations:
+  - id: upstream-scan-bi-weekly
+    owning_agent: team-maerg/chuck
+    cadence: "bi-weekly Monday 06:00 UTC"
+    mechanism: "TBD — /schedule routine to be created by schedule skill"
+    purpose: "Scan BMAD-METHOD upstream main for commits we don't have in team-maerg-relevant areas (bmad/core/, bmad/bmb/, tools/, package.json); produce bucketed brief with cherry-pick recommendations."
+    output_location: "bmad/team-maerg/_data/upstream-scans/<YYYY-MM-DD>.md"
+    last_fired: null
+    next_fire: 2026-05-18
+    created: 2026-05-05
+    retired_on: null
+    retirement_reason: null
+
+retired: []
