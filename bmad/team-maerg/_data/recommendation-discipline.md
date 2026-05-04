@@ -115,6 +115,21 @@ Rule: <provisional framing>
 - **Generic dissent.** "It could fail" is not dissent. Concrete dissent names a flip condition: "if X, recommendation flips to Y."
 - **Discipline as gate-keeping.** This is a producer-side discipline. The user can override at any tier; discipline records the reasoning, doesn't block the user.
 
+## Hook-bypass classification (per ADR 2026-05-05-graduated-hook-bypass-policy)
+
+When a pre-commit hook fails or conflicts with an intended commit, the recommendation surface is "how to proceed." Apply the hook taxonomy and DECLARE the classification in the message — silent agent discretion is not allowed; the classification must be auditable so the user can override.
+
+| Tier  | Hook type            | Examples                                                                                                                 | Default action                                                                                                                               |
+| ----- | -------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **S** | Security gate        | Secrets scan (gitleaks/trufflehog), SCA blocks, signature/SBOM enforcement                                               | NEVER bypass. Hard stop. Surface what tripped + request user resolution.                                                                     |
+| **P** | Policy enforcement   | Type checkers, test runners, lint rules tied to correctness, license headers                                             | Prefer fix-the-code or fix-the-hook. If bypass needed, ASK user (current uniform behavior).                                                  |
+| **C** | Convenience          | Prettier, import-sorting, EOL normalization, trailing-whitespace                                                         | Prefer fix-and-restage (re-run, re-stage, retry — NOT bypass). Bypass only when hook is Tier-B-broken; requires explicit user authorization. |
+| **B** | Broken/misconfigured | Hook whose implementation is buggy regardless of intended tier (overly-broad globs, env-dependent flake, infinite loops) | Name the bug, classify by underlying tier, apply that tier's policy. **Prefer fixing the mechanism over bypassing.**                         |
+
+**Mandatory transparent classification:** every hook-conflict recommendation declares the tier in the message (e.g., _"Classifying as Tier C, broken-implementation"_). No classification → defaults to Tier P treatment (ask before bypass). Classification is an auditable claim the user can override mid-message; silent agent judgment is not allowed on this surface.
+
+**Why this isn't laundering agent discretion:** the requirement is to DECLARE the classification, not to act silently. The user reads "Tier C" and can immediately respond "actually that's Tier S, halt." Without the declaration, the agent's reasoning is opaque. Transparency converts judgment from discretion into testable claim.
+
 ## Behavior test record (lock gate)
 
 Before this discipline locked, two test cases verified the footer changed recommendation behavior on honest application:
