@@ -3,7 +3,7 @@
 # Created 2026-04-22.
 
 # Standard BMAD config
-user_name: BMad
+user_name: Maerg
 communication_language: English
 document_output_language: English
 output_folder: "{project-root}/docs"
