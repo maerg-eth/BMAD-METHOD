@@ -5,59 +5,58 @@
 # Schema:
 #   regions:
 #     <region-name>:
-#       <category>:
+#       <category | "aggregators">:
 #         - url: <source-url>
 #           name: <human-readable name>
 #           fetch_format: <html | rss | json>  # parsing hint
-#           last_fetched: <ISO date>           # populated by Lyra after web-fetch
+#           covers: [<categories>]              # only on aggregators — multi-category coverage list
+#           last_fetched: <ISO date>            # populated by Lyra after web-fetch
 #           last_fetch_status: <success | failed | rate-limited>
 #
 # Maerg adds via *add-source <category> <url>; Lyra fetches via *weekly-plan / *find on cadence.
 # Fetch failures log to memories-autonomous-log.md ## fetch-failures.
+#
+# Schema note (added 2026-05-05): single-venue sources sit under their specific category
+# (e.g., istanbulmodern.org under museums). Multi-category aggregators sit under the
+# special "aggregators" key with a covers: [list] field naming the categories they span.
 
-regions: {} # Empty at v1 spawn — Maerg curates initial sources via *add-source.
-#
-# Predicted seed sources (NOT pre-loaded; Maerg adds when ready):
-#
-# nyc:
-#   jazz:
-#     - url: https://www.smallslive.com/calendar/
-#       name: Smalls
-#       fetch_format: html
-#     - url: https://villagevanguard.com/
-#       name: Village Vanguard
-#       fetch_format: html
-#     - url: https://www.bluenote.net/
-#       name: Blue Note
-#       fetch_format: html
-#   restaurants:
-#     - url: https://resy.com/cities/ny
-#       name: Resy NYC
-#       fetch_format: html
-#     - url: https://www.opentable.com/landmark/restaurants-near-me-new-york-ny
-#       name: OpenTable NYC
-#       fetch_format: html
-#   museums:
-#     - url: https://www.moma.org/calendar/
-#       name: MoMA
-#       fetch_format: html
-#     - url: https://whitney.org/events
-#       name: Whitney
-#       fetch_format: html
-#   comedy:
-#     - url: https://www.comedycellar.com/
-#       name: Comedy Cellar
-#       fetch_format: html
-#     - url: https://ucbcomedy.com/
-#       name: UCB
-#       fetch_format: html
-#   events:
-#     - url: https://www.eventbrite.com/d/ny--new-york/events/
-#       name: Eventbrite NYC
-#       fetch_format: html
-#
-# Add via: *add-source <category> <url>
+regions:
+  istanbul:
+    museums:
+      - url: https://istanbulmodern.org
+        name: Istanbul Modern
+        fetch_format: html
+        last_fetched: null
+        last_fetch_status: null
 
+    live_music:
+      - url: https://www.nardisjazz.com/
+        name: Nardis Jazz Club
+        fetch_format: html
+        last_fetched: null
+        last_fetch_status: null
+
+    aggregators:
+      - url: https://kultur.istanbul/etkinlikler/
+        name: Kültür İstanbul (city events portal)
+        fetch_format: html
+        covers: [museums, theatre, live_music, opera, dancing_events, workshops]
+        last_fetched: null
+        last_fetch_status: null
+
+      - url: https://www.zorlupsm.com/etkinlikler
+        name: Zorlu PSM
+        fetch_format: html
+        covers: [theatre, opera, live_music, dancing_events]
+        last_fetched: null
+        last_fetch_status: null
+
+      - url: https://biletinial.com/tr-tr/sehrineozel/istanbul-avrupa
+        name: Biletinial — Istanbul Avrupa
+        fetch_format: html
+        covers: [theatre, live_music, opera, comedy, dancing_events]
+        last_fetched: null
+        last_fetch_status: null
 # V1 acknowledges parsing brittleness honestly. When a fetch fails:
 # 1. Lyra logs to memories-autonomous-log.md ## fetch-failures
 # 2. Surfaces gap in *weekly-plan / *find output ("Smalls site fetch failed — manual paste from you would help")

@@ -47,6 +47,30 @@ agent: lyra
 
 ---
 
+source: fetch-failure
+timestamp: 2026-05-05T19:30:00Z
+agent: lyra
+
+---
+
+2026-05-05 | URL: https://kultur.istanbul/etkinlikler/ | Error: js-shell (event listings load dynamically; static HTML returns navigation + filter controls only) | Source still valid? yes-format-changed (site live, but server-side fetch insufficient — needs headless browser OR canonical API)
+
+---
+
+source: fetch-failure
+timestamp: 2026-05-05T19:30:00Z
+agent: lyra
+
+---
+
+2026-05-05 | URL: https://biletinial.com/tr-tr/sehrineozel/istanbul-avrupa | Error: js-shell (returns "Aradığınız sonuçlarla eşleşen etkinlik yok" + placeholder images; actual listings dynamic) | Source still valid? yes-format-changed (placeholder-image titles like "Dublörün Dilemması", "Fareler ve İnsanlar" surface but no dates/venues attached)
+
+---
+
+**Pattern note (first \*find cycle 2026-05-05):** All three Istanbul aggregator sources (kultur.istanbul, biletinial.com, zorlupsm.com — last one not fetched this cycle but same architecture class) appear to be JS-rendered SPAs. V1 web-fetch protocol is structurally insufficient for these. Two recovery paths in play: (a) Maerg pastes listings manually per fetch session, (b) escalate scope to general WebSearch outside curated pool — surfaces meta-decision for *reflect cycle whether V2 (canonical APIs) needs to come earlier than originally scoped, or whether to add headless-browser fetcher as a pre-V2 capability. Drift-signal flag candidate if pattern repeats across 3+ *find / \*weekly-plan cycles.
+
+---
+
 ## cross-cycle-notes
 
 _Lyra observations between weekly cycles — emerging interests Lyra notices, dormant categories, patterns that don't yet meet drift-signal threshold but worth tracking. Also: Maerg-narrated cross-agent context (per Cross-agent visibility floor protocol in instructions.md)._

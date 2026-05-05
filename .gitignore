@@ -65,3 +65,11 @@ z*/
 # privacy posture (Option A from 2026-05-05 brief). Never commit Brix content to
 # the public fork. See bmad/team-maerg/_data/handoffs/2026-05-05-shared-knowledge-layer-brief.md
 bmad/team-maerg/_data/brix/
+
+# Lyra sidecar — personal seed data (Maps Takeout, location-tagged reviews, etc.)
+# Never commit personal location/preference exports to the repo.
+bmad/team-maerg/agents/lyra-sidecar/seed/
+
+# Lyra sidecar — generated recommendation outputs (HTML/MD artifacts per *find / *weekly-plan)
+# Personal location + preference data; per-session ephemera.
+bmad/team-maerg/agents/lyra-sidecar/output/

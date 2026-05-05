@@ -3,63 +3,150 @@
 # Score: 0-10 overall preference. Notes: qualitative description of what KIND of thing in each category fits.
 # liked / disliked: bounded examples list. last_updated: ISO date.
 # Lyra writes via Q12-mirror confirmation gate — significant updates surface to Maerg before write.
+#
+# Schema revision 2026-05-05: expanded from 8 placeholder categories to 14 Maerg-specific ones
+# (split film_theater → film + theatre; renamed jazz → live_music; added opera, dancing_events,
+# wine_tasting, city_visits, workshops, classes; removed generic 'events' bucket; kept comedy +
+# outdoor as null/dormant).
 
 categories:
-  museums:
-    score: null # 0-10 — null until first signal
-    notes: "" # qualitative: "Modern art > classical; small + curated > blockbuster"
-    liked: [] # examples: [{name, date, signal: explicit-loved | accept | post-event-reflect-loved}]
-    disliked: [] # examples: [{name, date, signal: reject | post-event-reflect-wouldnt-repeat}]
-    last_updated: null
+  # ============================================================
+  # CONSUMPTION — going to experience
+  # ============================================================
 
   restaurants:
-    score: null
-    notes: "" # "Chef's-counter / tasting menu > à la carte; intimate > theatrical"
-    liked: []
+    score: 7 # provisional — Maps reviews capture "loved-it ceiling" only; calibrates with cycles
+    notes: |
+      Atmosphere is non-negotiable (5★ even when Service drops). Highly responsive
+      to "insider knowledge" — staff craft, off-menu asks, bartender's-choice format.
+      Wide price tolerance — no aversion either direction. International palate: enjoys
+      finding standout food anywhere he travels, not anchored to one cuisine. Maps
+      review surface is curated to "worth marking" — likely under-represents everyday meals.
+    liked:
+      - {
+          name: "Tayer Ya Fatayer Zamalek",
+          city: "Cairo",
+          date: "2026-01-03",
+          note: "Egyptian breakfast pastry — desserts especially",
+          signal: "review-5★",
+        }
+      - {
+          name: "Park Kebap Pide & Lahmacun",
+          city: "Istanbul",
+          date: "2025-05-28",
+          note: "Kebab — liver portion + spicy paste insider tip",
+          signal: "review-5★",
+        }
+      - {
+          name: "Bar Le Coq",
+          city: "Kyoto",
+          date: "2024-09-12",
+          note: "Cocktail bar — bartender's-choice format, intimate",
+          signal: "review-5★",
+        }
+      - { name: "Ngoc Chau", city: "Berlin", date: "2024-05-24", note: "Vietnamese", signal: "review-5★" }
+      - { name: "Cafe Jiro", city: "Berlin", date: "2024-04-07", note: "Vegetarian breakfast — banana bread", signal: "review-4★" }
     disliked: []
-    last_updated: null
+    last_updated: 2026-05-05
 
-  jazz:
-    score: null
-    notes: "" # "post-bop > traditional dixieland; intimate venues > stadium"
+  live_music:
+    score: null # active interest declared, no signals captured yet
+    notes: "Maerg listed as active interest 2026-05-05. Sub-pref hint: jazz/post-bop in intimate venues likely strong (test on first cycle). Awaits first signal."
     liked: []
     disliked: []
-    last_updated: null
+    last_updated: 2026-05-05
 
-  comedy:
+  theatre:
     score: null
-    notes: ""
+    notes: "Maerg listed as active interest 2026-05-05. Awaits first signal."
     liked: []
     disliked: []
-    last_updated: null
+    last_updated: 2026-05-05
 
-  events:
+  film:
     score: null
-    notes: "" # markets, festivals, talks, exhibitions
+    notes: "Maerg listed as active interest 2026-05-05. Strong sub-pref signal: old-school movie theatres specifically — venue-type matters, not just title. Awaits first signal."
     liked: []
     disliked: []
-    last_updated: null
+    last_updated: 2026-05-05
 
-  outdoor:
+  opera:
     score: null
-    notes: "" # sports, classes, walks, nature
+    notes: "Maerg listed as active interest 2026-05-05. Awaits first signal."
     liked: []
     disliked: []
-    last_updated: null
+    last_updated: 2026-05-05
+
+  museums:
+    score: null
+    notes: "Maerg listed as active interest 2026-05-05 ('museum and exhibition visits'). Awaits first signal."
+    liked: []
+    disliked: []
+    last_updated: 2026-05-05
+
+  dancing_events:
+    score: null
+    notes: "Maerg listed as active interest 2026-05-05. Distinct from dance classes — this is going-to-dance, not learning. Awaits first signal."
+    liked: []
+    disliked: []
+    last_updated: 2026-05-05
+
+  wine_tasting:
+    score: null
+    notes: "Maerg listed as active interest 2026-05-05 ('wine and food tasting'). Distinct from restaurants — curated/structured tasting experiences. Awaits first signal."
+    liked: []
+    disliked: []
+    last_updated: 2026-05-05
+
+  city_visits:
+    score: null
+    notes: "Maerg listed as active interest 2026-05-05. Urban exploration — neighborhood walks, architecture, hidden corners. Awaits first signal."
+    liked: []
+    disliked: []
+    last_updated: 2026-05-05
+
+  # ============================================================
+  # SKILL-BUILDING — going to learn / practice
+  # ============================================================
+
+  workshops:
+    score: null
+    notes: "Maerg listed as active interest 2026-05-05. Examples cited: ceramic, painting. Craft skill-building. Awaits first signal."
+    liked: []
+    disliked: []
+    last_updated: 2026-05-05
+
+  classes:
+    score: null
+    notes: "Maerg listed as active interest 2026-05-05. Examples cited: dance classes, martial arts. Movement / physical skill-building. Awaits first signal."
+    liked: []
+    disliked: []
+    last_updated: 2026-05-05
+
+  # ============================================================
+  # CATCHALL / DORMANT — kept null until signal surfaces
+  # ============================================================
 
   social:
     score: null
-    notes: "" # parties, meetups, conferences
+    notes: "Catchall for parties, meetups, conferences. Maerg did not enumerate explicitly 2026-05-05 — slot kept open."
     liked: []
     disliked: []
-    last_updated: null
+    last_updated: 2026-05-05
 
-  film_theater:
+  comedy:
     score: null
-    notes: "" # film + theater (combined; split if signals diverge)
+    notes: "Not listed by Maerg 2026-05-05 — slot kept open in case drift-signal surfaces. Absence-of-signal ≠ absence-of-interest."
     liked: []
     disliked: []
-    last_updated: null
+    last_updated: 2026-05-05
+
+  outdoor:
+    score: null
+    notes: "Not listed by Maerg 2026-05-05 — slot kept open. Sports / hikes / nature. Absence-of-signal ≠ absence-of-interest."
+    liked: []
+    disliked: []
+    last_updated: 2026-05-05
 # Categories may expand as Maerg surfaces new interests via *capture-preference or drift-signals.
 # Schema rule: never delete an entry from liked/disliked without Maerg's explicit confirmation.
 # Rotation trigger (per Q4 lock — deferred to first-incident): if any category's liked + disliked > 30 entries,
