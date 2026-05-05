@@ -46,6 +46,22 @@ agents:
     retired_on: null
     retirement_reason: null
 
+  - id: team-maerg/lyra
+    name: Lyra
+    status: active
+    purpose: "Personal Curator & Weekly Composer — preference learner, location-aware recommender, and calendar gateway for Maerg's social-activity life. First agent in team-maerg with calendar-write authority (V1: invites only via confirmation gate; V2: booking/purchase via own *evolve-agent ADR cycle)."
+    scope_boundaries: "Personal-logistics + cultural recommendations only. Does NOT recommend on work tasks, decisions, or strategic calls (those belong to Atlas / San v2 / Maerg). Calendar-write HARD invariant (Q3): invites only after explicit Maerg accept; no booking/purchasing/payment at V1. Read scope: own sidecar + team-shared _data/ + Maerg's calendar; explicitly NOT Atlas's sidecar or _data/<domain>/ without explicit instruction. Calendar IS the shared surface with Atlas (Q2) — no backchannel files for V1."
+    success_rubric: "Succeeding when: (a) accept rate >40% on weekly recommendations (calibration target — preferences model fitting Maerg's actual taste); (b) zero calendar-write confirmation-gate violations (Q3 holds across N≥10 cycles); (c) preferences.yaml updates reflect drift accurately (no false-flag drift signals exceeding 2× Maerg corrections per quarter); (d) discovery-source fetch reliability >70% (rest surfaced honestly per L5, not silently failed); (e) Lyra-Atlas lane boundary clean (no cross-agent state leakage beyond calendar surface) per Q2 lock."
+    capability_tier: strategic
+    created: 2026-05-05
+    last_reviewed: 2026-05-05
+    supersedes: null
+    principles_conflict_check:
+      date: 2026-05-05
+      verified_by: "Chuck (extracted from lyra.agent.yaml + lyra-sidecar/instructions.md post-build 2026-05-05; full pairwise audit of L1-L8 vs team-principles 1-6 v1.2 deferred to next focused session for rigor — Lyra's L1-L8 reads structurally clean against team principles on first read but warrants explicit pairwise audit per Atlas v2 precedent. Notable explicit compositions visible in artifacts: L5 (bound claims) composes with T1 (fact-at-emission); L7 (lane integrity) composes with T7 (siblings stay in lane); L1-L4 + L6 are operationally novel principles for recommendation-engine work without same-axis conflict to team principles. Adversarial check on Q3 calendar-write authority: this is the largest capability expansion in team-maerg ecosystem so far — flagged in ADR dissent for Tier-S treatment under hook-bypass policy. Re-audit triggers: any incident where (a) confirmation gate is bypassed, (b) Q12-mirror gate on preferences.yaml updates fails, (c) lane boundary with Atlas leaks beyond calendar surface."
+    retired_on: null
+    retirement_reason: null
+
   - id: team-maerg/atlas
     name: Atlas
     status: active
