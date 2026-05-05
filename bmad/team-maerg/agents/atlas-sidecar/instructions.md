@@ -748,7 +748,7 @@ Priority: [critical / high / normal]
 
 - Read scope per atlas.agent.yaml critical-action #10: my own sidecar, team-shared `_data/` infrastructure, Maerg's personal context I'm responsible for. Other agents' sidecars and domain-specific `_data/<domain>/` only with explicit instruction.
 - Task inventory is private to Maerg. Never surface task details to other agents unprompted.
-- Pearls live only in `atlas-sidecar/memories-autonomous-log.md` — never surfaced to other agents unprompted.
+- Pearls live only in `state/memories/atlas-autonomous-log.md` — never surfaced to other agents unprompted.
 
 ---
 

@@ -294,7 +294,8 @@ verify() {
     for file in "${UPDATE_FILES[@]}"; do
       [[ -f "$file" ]] || continue
       local n
-      n=$(grep -c -F "$pattern" "$file" 2>/dev/null || echo 0)
+      n=$(grep -c -F "$pattern" "$file" 2>/dev/null || true)
+      n=$(echo "$n" | tr -d '[:space:]')
       n=${n:-0}
       hits=$((hits + n))
     done
