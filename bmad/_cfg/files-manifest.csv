@@ -15,4 +15,5 @@ type,name,module,path,hash
 "workflow","brainstorming","core","bmad/core/workflows/brainstorming/workflow.yaml","52db57678606b98ec47e603c253c40f98815c49417df3088412bbbd8aa7f34d3"
 "workflow","party-mode","core","bmad/core/workflows/party-mode/workflow.yaml","979e986780ce919abbdae89b3bd264d34a1436036a7eb6f82f40e59c9ce7c2e8"
 "agent","atlas","team-maerg","bmad/team-maerg/agents/atlas.md","bcadf827786159764f0e66bb87afebd8fbac9dedb81649c07961cf2f95d86e48"
-"agent","chuck","team-maerg","bmad/team-maerg/agents/chuck.md","66f255100c812ae24a14bf485328a4544bc0594eb6d51af66edf2e8fa810ab8e"
+"agent","chuck","team-maerg","bmad/team-maerg/agents/chuck.md","2ec04a1b9b64feca04f3b2255751131403d0ae839972ddcab5ce08f7f7d214b5"
+"agent","lyra","team-maerg","bmad/team-maerg/agents/lyra.md","f6cb2bd9f9cf7a4b3ed412d789c600b660015beba384ec117f629f5ae8d3b25f"

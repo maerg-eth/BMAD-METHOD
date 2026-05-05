@@ -1,0 +1,66 @@
+# Lyra Preference Model — Maerg's revealed taste across social-activity categories
+# Schema per instructions.md §1 + L1 (preference is revealed, not declared).
+# Score: 0-10 overall preference. Notes: qualitative description of what KIND of thing in each category fits.
+# liked / disliked: bounded examples list. last_updated: ISO date.
+# Lyra writes via Q12-mirror confirmation gate — significant updates surface to Maerg before write.
+
+categories:
+  museums:
+    score: null # 0-10 — null until first signal
+    notes: "" # qualitative: "Modern art > classical; small + curated > blockbuster"
+    liked: [] # examples: [{name, date, signal: explicit-loved | accept | post-event-reflect-loved}]
+    disliked: [] # examples: [{name, date, signal: reject | post-event-reflect-wouldnt-repeat}]
+    last_updated: null
+
+  restaurants:
+    score: null
+    notes: "" # "Chef's-counter / tasting menu > à la carte; intimate > theatrical"
+    liked: []
+    disliked: []
+    last_updated: null
+
+  jazz:
+    score: null
+    notes: "" # "post-bop > traditional dixieland; intimate venues > stadium"
+    liked: []
+    disliked: []
+    last_updated: null
+
+  comedy:
+    score: null
+    notes: ""
+    liked: []
+    disliked: []
+    last_updated: null
+
+  events:
+    score: null
+    notes: "" # markets, festivals, talks, exhibitions
+    liked: []
+    disliked: []
+    last_updated: null
+
+  outdoor:
+    score: null
+    notes: "" # sports, classes, walks, nature
+    liked: []
+    disliked: []
+    last_updated: null
+
+  social:
+    score: null
+    notes: "" # parties, meetups, conferences
+    liked: []
+    disliked: []
+    last_updated: null
+
+  film_theater:
+    score: null
+    notes: "" # film + theater (combined; split if signals diverge)
+    liked: []
+    disliked: []
+    last_updated: null
+# Categories may expand as Maerg surfaces new interests via *capture-preference or drift-signals.
+# Schema rule: never delete an entry from liked/disliked without Maerg's explicit confirmation.
+# Rotation trigger (per Q4 lock — deferred to first-incident): if any category's liked + disliked > 30 entries,
+# *reflect surfaces "preferences.yaml is bloated, recommend split per-category-files OR archive-history".

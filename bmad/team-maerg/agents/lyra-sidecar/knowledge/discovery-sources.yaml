@@ -1,0 +1,67 @@
+# Lyra Discovery Sources — curated source URLs for activity discovery
+# Per L5 + Q6 lock: V1 = Maerg-curated source list + light web-fetch automation per *weekly-plan / *find.
+# V2 = canonical API integrations (Eventbrite, Resy, OpenTable, Ticketmaster, museum APIs) — own *evolve-agent ADR cycle.
+#
+# Schema:
+#   regions:
+#     <region-name>:
+#       <category>:
+#         - url: <source-url>
+#           name: <human-readable name>
+#           fetch_format: <html | rss | json>  # parsing hint
+#           last_fetched: <ISO date>           # populated by Lyra after web-fetch
+#           last_fetch_status: <success | failed | rate-limited>
+#
+# Maerg adds via *add-source <category> <url>; Lyra fetches via *weekly-plan / *find on cadence.
+# Fetch failures log to memories-autonomous-log.md ## fetch-failures.
+
+regions: {} # Empty at v1 spawn — Maerg curates initial sources via *add-source.
+#
+# Predicted seed sources (NOT pre-loaded; Maerg adds when ready):
+#
+# nyc:
+#   jazz:
+#     - url: https://www.smallslive.com/calendar/
+#       name: Smalls
+#       fetch_format: html
+#     - url: https://villagevanguard.com/
+#       name: Village Vanguard
+#       fetch_format: html
+#     - url: https://www.bluenote.net/
+#       name: Blue Note
+#       fetch_format: html
+#   restaurants:
+#     - url: https://resy.com/cities/ny
+#       name: Resy NYC
+#       fetch_format: html
+#     - url: https://www.opentable.com/landmark/restaurants-near-me-new-york-ny
+#       name: OpenTable NYC
+#       fetch_format: html
+#   museums:
+#     - url: https://www.moma.org/calendar/
+#       name: MoMA
+#       fetch_format: html
+#     - url: https://whitney.org/events
+#       name: Whitney
+#       fetch_format: html
+#   comedy:
+#     - url: https://www.comedycellar.com/
+#       name: Comedy Cellar
+#       fetch_format: html
+#     - url: https://ucbcomedy.com/
+#       name: UCB
+#       fetch_format: html
+#   events:
+#     - url: https://www.eventbrite.com/d/ny--new-york/events/
+#       name: Eventbrite NYC
+#       fetch_format: html
+#
+# Add via: *add-source <category> <url>
+
+# V1 acknowledges parsing brittleness honestly. When a fetch fails:
+# 1. Lyra logs to memories-autonomous-log.md ## fetch-failures
+# 2. Surfaces gap in *weekly-plan / *find output ("Smalls site fetch failed — manual paste from you would help")
+# 3. Maerg can manually paste activity listings; Lyra incorporates into recommendation pool
+#
+# V2 = API integrations (more reliable structured data). Each API integration is its own auth + payment surface
+# and ships in a dedicated *evolve-agent ADR cycle — not pre-built.

@@ -37,4 +37,28 @@ automations:
     retired_on: null
     retirement_reason: null
 
+  - id: weekly-plan-generation
+    owning_agent: team-maerg/lyra
+    cadence: "weekly Sunday 19:00 UTC"
+    mechanism: "TBD — /schedule routine to be created by schedule skill (mirror Atlas calibration + upstream-scan pattern)"
+    purpose: "Auto-fire Lyra's *weekly-plan on Sunday cadence; surface multi-option weekly plan to Maerg for accept/reject review. Reads preferences.yaml + calendar + discovery-sources.yaml; composes 2-3 options per available slot."
+    output_location: "bmad/team-maerg/agents/lyra-sidecar/weekly-plans/<YYYY-MM>.md (INTENDED entry appended on each fire)"
+    last_fired: null
+    next_fire: 2026-05-10
+    created: 2026-05-05
+    retired_on: null
+    retirement_reason: null
+
+  - id: event-proximity-check
+    owning_agent: team-maerg/lyra
+    cadence: "every 2-3 days (Mon/Wed/Fri 18:00 UTC)"
+    mechanism: "TBD — /schedule routine to be created by schedule skill (weekly cron + self-skip on non-fire days, OR cron 0 18 * * 1,3,5)"
+    purpose: "Read accepted events from current weekly plan + calendar (next 48h window); surface approaching-event briefings ('jazz at Smalls Wednesday — *event-prep recommended'). Lightweight reminder loop; no recommendation generation."
+    output_location: "Surfaces to Maerg via session-start scan or notification (V3 capability — V1 logs to memories-autonomous-log.md ## scan-observations until notification surface ships)"
+    last_fired: null
+    next_fire: 2026-05-11
+    created: 2026-05-05
+    retired_on: null
+    retirement_reason: null
+
 retired: []
